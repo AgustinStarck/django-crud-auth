@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm , AuthenticationForm
 from django.contrib.auth.models import User
-from django.contrib.auth import login
+from django.contrib.auth import login , logout
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.db import IntegrityError
@@ -47,5 +47,23 @@ def singup(request):
 def tasks(request): 
     return render(request, 'tasks.html')          
     
+def signout(request):
+    logout(request)
+    return redirect('home')
+
+def signin(request):
+    if request.method== 'GET':
+            return render(request, 'signin.html', {
+        'form': AuthenticationForm
+    })
+    else:
+        print(request.POST)
+        return render(request, 'signin.html', {
+        'form': AuthenticationForm
+    })
+
+    
+
+
     
 
