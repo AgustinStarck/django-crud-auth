@@ -67,8 +67,7 @@ def signin(request):
         else:
             login(request, user)
             return redirect('tasks')        
-        
-    
+
     if user is None:
                 return render(request, 'signin.html', {
         'form': AuthenticationForm
