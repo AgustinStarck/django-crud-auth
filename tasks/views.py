@@ -81,7 +81,11 @@ def signin(request):
         else:
             login(request, user)
             return redirect('tasks')        
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 6ae29341170c078e339fa526af016e4c84aa3eac
     if user is None:
                 return render(request, 'signin.html', {
         'form': AuthenticationForm
