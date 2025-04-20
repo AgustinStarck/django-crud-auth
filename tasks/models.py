@@ -9,8 +9,6 @@ class Task(models.Model):
   created = models.DateTimeField(auto_now_add=True)
   datecompleted = models.DateTimeField(null=True, blank=True)
   important = models.BooleanField(default=False)
-<<<<<<< HEAD
   user = models.ForeignKey(User, on_delete=models.CASCADE)
-=======
   user = models.ForeignKey(User, on_delete=models.CASCADE)
->>>>>>> 6ae29341170c078e339fa526af016e4c84aa3eac
+
