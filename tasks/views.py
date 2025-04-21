@@ -5,7 +5,7 @@ from django.contrib.auth import login , logout , authenticate
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.db import IntegrityError
-from .forms import TaskFrom
+from .forms import TaskForm
 
 # Create your views here.
 
@@ -50,16 +50,16 @@ def tasks(request):
     
 def create_tasks(request):
     
-    if request.method == "get":
+    if request.method == "GET":
         return render(request, 'create_tasks.html',{
-        'form': TaskFrom()
+        'form': TaskForm()
     })
     else:
-        print(request.POST)
-        return render(request, 'create_tasks.html',{
-        'form': TaskFrom()
-    })
-    
+        form1 = TaskForm(request.POST)
+        new_task = form1.save(commit=False)
+        new_task.user = request.user
+        new_task.save()
+        return redirect ('tasks')
     
 def signout(request):
     logout(request)
