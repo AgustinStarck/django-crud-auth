@@ -5,7 +5,17 @@
 
 <ul>
     {% for task in tasks %}
+    {% if task.important %}
+    <li>
+    <a href= "{% url "task_detail" task.id %}">
+        <strong>{{task.title}}</strong>
+    {% else %}
     <li>{{task.title}}</li>
+    {% endif %}
+    <p>{{task.description}}</p>
+    <p>{{task.user.username}}</p>
+    </a>
+    </li>
     {% endfor %}
 </ul>
 
