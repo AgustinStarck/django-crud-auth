@@ -5,6 +5,8 @@ from django.contrib.auth import login , logout , authenticate
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.db import IntegrityError
+from .forms import TaskForm
+from .models import Task
 
 # Create your views here.
 
@@ -44,8 +46,29 @@ def singup(request):
                 "error": "Las contraseñas no coinciden"
                 })    
 
-def tasks(request): 
-    return render(request, 'tasks.html')          
+def tasks(request):
+    tasks = Task.objects.all()
+    return render(request, 'tasks.html', {'tasks' : tasks})
+    
+def create_tasks(request):
+    
+    if request.method == "GET":
+        return render(request, 'create_tasks.html',{
+        'form': TaskForm()
+    })
+    else:
+        try:
+            form1 = TaskForm(request.POST)
+            new_task = form1.save(commit=False)
+            new_task.user = request.user
+            new_task.save()
+            return redirect ('tasks')
+        except ValueError:
+            if request.method == "GET":
+                return render(request, 'create_tasks.html',{
+                'form': TaskForm(),
+                'error' : 'please provide valid data'
+                })
     
 def signout(request):
     logout(request)
