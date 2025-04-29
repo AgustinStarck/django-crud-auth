@@ -2,21 +2,37 @@
 
 {% block content %}
 
+
 <h1>Signin</h1>
 
 
 {{error}}
 
+<div clas="row">
+    <div class="col-md-4 offset-md-4 mt-5">
 
-<form action="/signin/" method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button>
+        <form action="/signin/" method="post" class="card card-body" >
+            {% csrf_token %}
+            
+            <div class="mb-3">
 
-        Signin
+                <label for="username" class="text-center d-block"> Username: </label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required><br>
 
-    </button>
+                <label for="Password" class="text-center d-block"> Password: </label>
+                <input type="Password" class="form-control" id="Password" name="password" placeholder="Enter your password" required><br>
 
-</form>
+                
+            </div>
+
+            <button>
+
+                Signin
+
+            </button>
+
+        </form>
+    </div>
+</div>
 
 {% endblock %}
